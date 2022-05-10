@@ -29,3 +29,32 @@ const x = 'vivo';
 console.log('Vivo', personaje[x]);
 
 console.log('Última película', personaje['ultima-pelicula']);
+
+// Más detalles
+
+// Elimina la propiedad del objeto
+delete personaje.edad;
+console.log(personaje);
+
+// Añade una propiedad al objeto
+personaje.casado = true;
+
+// Añade un array por cada clave/valor
+const entriesPares = Object.entries(personaje);
+console.log(entriesPares);
+
+// No se podrá modificar las propiedades del objeto (ni agregar ni borrar)
+Object.freeze(personaje);
+
+// Añade una propiedad al objeto
+personaje.dinero = 1000000;
+personaje.casado = false;
+personaje.direccion.ubicacion = 'Costa Rica';
+
+const propiedades = Object.getOwnPropertyNames(personaje);
+const valores = Object.values(personaje);
+console.log({propiedades, valores});
+
+
+
+
