@@ -5,6 +5,7 @@
  // Referencias al html
  const divTodoList = document.querySelector('.todo-list');
  const txtInput = document.querySelector('.new-todo');
+ const btnBorrar = document.querySelector('.clear-completed');
 
 export const crearTodoHtml = (todo) => {
     // Crea el elemento de la lista
@@ -60,9 +61,26 @@ divTodoList.addEventListener('click', (event) => {
         todoList.marcarCompletado(todoId);
         // Cambia el estado del elemento
         todoElemento.classList.toggle('completed');
-    } else if (nombreElemento.includes('button')) { // Se borra el todo
-            todoList.eliminarTodo(todoId);
-            // Elimina el elemento html de la lista
-            divTodoList.removeChild(todoElemento);
+    }
+    // Se borra el todo
+    else if (nombreElemento.includes('button')) {
+        // Elimina el todo de la lista
+        todoList.eliminarTodo(todoId);
+        // Elimina el elemento html de la lista
+        divTodoList.removeChild(todoElemento);
+    }
+});
+
+btnBorrar.addEventListener('click', () => {
+    // Elimina los todos completados del array
+    todoList.eliminarCompletados();
+    for (let i = divTodoList.children.length - 1; i >= 0; i--) {
+        // Recupera el elemento hijo de divTodoList que es un li (todos los que haya)
+        const elemento = divTodoList.children[i];
+
+        // Comprueba si el elemento contiene la clase completed
+        if (elemento.classList.contains('completed')) {
+            divTodoList.removeChild(elemento)
+        }
     }
 });

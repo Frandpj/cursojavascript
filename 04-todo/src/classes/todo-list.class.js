@@ -33,7 +33,8 @@ export class TodoList {
 
     // Metodo para borrar todos los completados
     eliminarCompletados() {
-
+        // Devuelve una nueva lista con todos los que no estén completados
+        this.todos = this.todos.filter(todo => !todo.completado);
     }
 
 }
