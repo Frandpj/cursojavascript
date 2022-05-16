@@ -12,7 +12,10 @@ export class TodoList {
 
     // Metodo para eliminar un todo
     eliminarTodo(id) {
-
+        // Devuelve una nueva lista con todos menos el que se quiere eliminar
+        // Para que se entienda, en el array solo van a entrar los ids que no se hayan mandado, en este caso el que se va a borrar
+        this.todos = this.todos.filter(todo => todo.id != id);
+        console.log(this.todos);
     }
 
     // Metodo marcar los todos como completados

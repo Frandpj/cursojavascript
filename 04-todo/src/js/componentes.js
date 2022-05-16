@@ -60,7 +60,9 @@ divTodoList.addEventListener('click', (event) => {
         todoList.marcarCompletado(todoId);
         // Cambia el estado del elemento
         todoElemento.classList.toggle('completed');
+    } else if (nombreElemento.includes('button')) { // Se borra el todo
+            todoList.eliminarTodo(todoId);
+            // Elimina el elemento html de la lista
+            divTodoList.removeChild(todoElemento);
     }
-
-    console.log(todoList);
 });
