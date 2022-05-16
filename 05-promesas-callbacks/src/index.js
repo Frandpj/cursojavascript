@@ -1,7 +1,7 @@
-import { saludar } from './js/componentes.js';
+// Impota otro archivo js
+import {saludar} from './js/componentes';
 import './styles.css';
 
+const nombre = 'Fran';
 
-const nombre = 'Fernando';
-
-saludar( nombre );
+saludar(nombre);
