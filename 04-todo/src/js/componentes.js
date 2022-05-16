@@ -45,3 +45,22 @@ txtInput.addEventListener('keyup', (event) => {
         txtInput.value = '';
     }
 });
+
+divTodoList.addEventListener('click', (event) => {
+    // Comprueba que se hizo click sobre el elemento y devuelve el nombre del elemento
+    const nombreElemento = event.target.localName; // input, label, button
+    // Comprueba que se hizo click sobre el elemento y devuelve el elemento padre
+    const todoElemento = event.target.parentElement.parentElement; // li
+    // Comprueba que se hizo click sobre el elemento y devuelve el id del elemento
+    const todoId = todoElemento.getAttribute('data-id');
+
+    // Comprueba que se hizo click sobre el input
+    if (nombreElemento.includes('input')) {
+        // Marca el todo como completado
+        todoList.marcarCompletado(todoId);
+        // Cambia el estado del elemento
+        todoElemento.classList.toggle('completed');
+    }
+
+    console.log(todoList);
+});
