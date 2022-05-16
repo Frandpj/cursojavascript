@@ -6,6 +6,8 @@
  const divTodoList = document.querySelector('.todo-list');
  const txtInput = document.querySelector('.new-todo');
  const btnBorrar = document.querySelector('.clear-completed');
+ const ulFiltros = document.querySelector('.filters');
+ const anchorFiltros = document.querySelectorAll('.filtro');
 
 export const crearTodoHtml = (todo) => {
     // Crea el elemento de la lista
@@ -81,6 +83,43 @@ btnBorrar.addEventListener('click', () => {
         // Comprueba si el elemento contiene la clase completed
         if (elemento.classList.contains('completed')) {
             divTodoList.removeChild(elemento)
+        }
+    }
+});
+
+ulFiltros.addEventListener('click', (event) => {
+    // Comprueba que se hizo click sobre el elemento y devuelve el nombre del elemento
+    const filtro = event.target.text;
+
+    // Comprueba el filtro y muestra los todos correspondientes
+    if (!filtro) {
+        return;
+    }
+
+    // Recorre los elementos del html y le quita la clase selected para que no sean los activos
+    anchorFiltros.forEach(elem => elem.classList.remove('selected'));
+    // Agrega la clase selected al elemento que se hizo click
+    event.target.classList.add('selected');
+
+    // Recorre los hijos del elemento divTodoList que son los li
+    for (const elemento of divTodoList.children) {
+        // Borra la clase hidden de los elementos
+        elemento.classList.remove('hidden');
+        // Comprueba si el elemento contiene la clase completed
+        const completado = elemento.classList.contains('completed');
+
+        // Comprueba si el texto que trae el filtro es "Pendientes" o "Completados"
+        switch (filtro) {
+            case 'Pendientes':
+                if (completado) {
+                    elemento.classList.add('hidden');
+                }
+            break;
+            case 'Completados':
+                if (!completado) {
+                    elemento.classList.add('hidden');
+                }
+            break;
         }
     }
 });
