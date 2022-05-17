@@ -25,3 +25,17 @@ export const obtenerHeroesArr = async() => {
     // Devuelve una promesa con un array de promesas (heroes)
     return await Promise.all(heroesIds.map(buscarHeroe));
 };
+
+export const obtenerHeroeAwait = async(id) => {
+
+    try {
+        const heroe = await buscarHeroeAsync(id);
+    
+        return heroe;
+    } catch (err) {
+        return {
+            nombre: 'Sin nombre',
+            poder: 'Sin poder'
+        }
+    }
+}

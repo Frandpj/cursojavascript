@@ -1,8 +1,9 @@
-import { obtenerHeroesArr } from './js/await.js';
+import { obtenerHeroesArr, obtenerHeroeAwait } from './js/await.js';
 
 console.time('await');
 
-obtenerHeroesArr().then(heroes => {
-    console.table(heroes);
+obtenerHeroeAwait('capi2').then(heroes => {
+    console.log(heroes);
     console.timeEnd('await');
-});
+})
+.catch(err => console.warn(err));
