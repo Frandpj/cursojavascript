@@ -35,6 +35,27 @@ export const buscarHeroe = (id) => {
     });
 }
 
+/**
+ * En este caso, no necesita un callback
+ * Esta promesa es igual que la de arriba pero con un async
+ */
+ export const buscarHeroeAsync = async(id) => {
+    const heroe = heroes[id];
+
+    // Si el heroe existe
+    if (heroe) {
+        // Esto es lo mismo que el resolve
+        return heroe;
+    }
+    else {
+        // Esto es lo mismo que el reject
+        // Forma tradicional en la que solo envia el mensaje
+        throw `No se encontró un héroe con el id ${id}`;
+        // Forma en la que te dice el porque del error
+        // throw Error(`No se encontró un héroe con el id ${id}`);
+    }
+}
+
 const promesaLenta = new Promise((resolve, reject) => {
     setTimeout(() => resolve('Promesa Lenta'), 2000);
 });
@@ -44,7 +65,7 @@ const promesaMedia = new Promise((resolve, reject) => {
 });
 
 const promesaRapida = new Promise((resolve, reject) => {
-    setTimeout(() => reject('Promesa Rápida'), 1000);
+    setTimeout(() => resolve('Promesa Rápida'), 1000);
 });
 
 export  {
