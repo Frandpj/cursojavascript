@@ -1,6 +1,10 @@
 const jokeUrl = 'https://api.chucknorris.io/jokes/random';
 const urlUsuarios = 'https://reqres.in/api/users?page=2';
 
+// Cloudinary
+const cloadPreset = 'ekbweoqu';
+const cloudUrl = 'https://api.cloudinary.com/v1_1/dzfb0rkwh/upload';
+
 // Con el async la función retorna una promesa
 const obtenerChiste = async() => {
     try {
@@ -28,10 +32,42 @@ const obtenerUsuarios = async() => {
     return usuarios;
 }
 
+// ArchivoSubir :: File
+const subirImagen = async(archivoSubir) => {
+    // Crea el resultado de un formulario html
+    const formData = new FormData();
+    formData.append('upload_preset', cloadPreset);
+    formData.append('file', archivoSubir);
+
+    try {
+        
+        // Esta es la petición POST para subir una imagen
+        const resp = await fetch(cloudUrl, {
+            method: 'POST',
+            body: formData
+        });
+        
+        // Si la respuesta es correcta
+        if (resp.ok) {
+            const cloudRest = await resp.json();
+            return cloudRest.secure_url;
+        }
+        else {
+            throw await resp.json();
+        }
+
+    } catch (error) {
+
+        throw error;
+        
+    }
+}
+
 
 export {
     obtenerChiste,
-    obtenerUsuarios
+    obtenerUsuarios,
+    subirImagen
 }
 
 
