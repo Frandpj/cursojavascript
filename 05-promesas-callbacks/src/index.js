@@ -1,9 +1,12 @@
-// import { buscarHeroe } from './js/callbacks';
+import { buscarHeroe as buscarHeroeCallback } from './js/callbacks';
+import { buscarHeroe } from './js/promesas';
 import './styles.css';
 
 const heroeId1 = 'capi';
 const heroeId2 = 'iron';
 
+
+// CÓDIGO CON CALLBACKS
 /**
  * Un callback es una función enviada como un argumento
  * Esta función como vemos tiene dos parámetros y uno de ellos es una función con otros dos parámetros
@@ -21,3 +24,29 @@ const heroeId2 = 'iron';
 //         console.log(`Enviando a ${heroe1.nombre} y a ${heroe2.nombre} a la misión`);
 //     });
 // });
+
+// CÓDIGO CON PROMESAS
+/**
+ * Las promesas dejan que el código se ejecute de forma asíncrona
+ * por lo tanto aunque una promesa este en proceso, el código sigue ejecutándose,
+ * este código es lo mismo que el de arriba pero con promesas
+ */
+// buscarHeroe(heroeId1).then(heroe1 => {
+//     console.log(`Enviando a ${heroe.nombre} a la misión`);
+//     buscarHeroe(heroeId2).then(heroe2 => {
+//         console.log(`Enviando a ${heroe1.nombre} y a ${heroe2.nombre} a la misión`);
+//     });
+// });
+
+/**
+ * Esto es lo mismo que el de arriba pero con una sola promesa (esto es lo que se debe de hacer)
+ * El promise.all es una función que recibe un array de promesas y devuelve una promesa
+ * Se puede utilizar la desestructuración de arrays, para recoger los valores de las promesas
+ * Para desestructurar un array en una función se utiliza ([valor1, valor2, valor3])
+ */
+Promise.all([buscarHeroe(heroeId1), buscarHeroe(heroeId2)])
+.then(([heroe1, heroe2]) => {
+    console.log(`Enviando a ${heroe1.nombre} y a ${heroe2.nombre} a la misión`);
+});
+
+console.log('Fin del programa');
